@@ -11,3 +11,6 @@
 [submodule "src/vicon_bridge"]
 	path = src/vicon_bridge
 	url = https://github.com/OliverWu1996/vicon_bridge.git
+[submodule "src/rviz"]
+	path = src/rviz
+	url = git@github.com:ros-visualization/rviz.git
