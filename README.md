@@ -42,6 +42,12 @@ catkin build
 
 where `<github-package-url>` is the GitHub download URL of our package.
 
+You can build a Docker image for VKC by the following commands
+```bash
+cd Planning-on-VKC
+docker build -t vkc:test .
+```
+
 *Note: Use `--dry-run` to list the packages which will be built.*
 
 

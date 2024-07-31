@@ -1,5 +1,5 @@
 # If not working, first do: sudo rm -rf /tmp/.docker.xauth
-# It still not working, try running the script as root.
+# If still not working, try running the script as root.
 
 # PATH = "./"
 # VOLUME_NAME = "dvolume"
