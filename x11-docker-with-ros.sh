@@ -33,6 +33,7 @@ docker run -it \
     --env="QT_X11_NO_MITSHM=1" \
     --env="XAUTHORITY=$XAUTH" \
     --volume="$XAUTH:$XAUTH" \
+    --workdir /home/vkc \
     --net=host \
     --privileged \
     vkc:test \

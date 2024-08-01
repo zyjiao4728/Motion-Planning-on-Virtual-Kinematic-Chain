@@ -42,10 +42,13 @@ catkin build
 
 where `<github-package-url>` is the GitHub download URL of our package.
 
-You can build a Docker image for VKC by the following commands
+You can build a [Docker](https://docs.docker.com/engine/install/) image for VKC and run the example of *using a stick to pick a ball* by the following commands
 ```bash
 cd Planning-on-VKC
 docker build -t vkc:test .
+sh ./x11-docker-with-ros.sh
+source ./devel/setup.bash
+roslaunch vkc_example household_env.launch
 ```
 
 *Note: Use `--dry-run` to list the packages which will be built.*
