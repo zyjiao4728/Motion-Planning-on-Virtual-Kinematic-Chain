@@ -3,7 +3,7 @@ blacklist: []
 build_space: build
 catkin_make_args: []
 cmake_args: []
-devel_layout: linked
+devel_layout: merged
 devel_space: devel
 extend_path: /opt/ros/noetic
 extends: null
