@@ -52,9 +52,9 @@ class CostInfo {
   double getGoalCost() { return cnt_viols[0]; }
 };
 
-void solveProb(tesseract_planning::PlannerRequest request);
+tesseract_planning::PlannerResponse solveProb(tesseract_planning::PlannerRequest request);
 
-void solveOmplProb(tesseract_planning::PlannerRequest request);
+tesseract_planning::PlannerResponse solveOmplProb(tesseract_planning::PlannerRequest request);
 
 void refineTrajectory(tesseract_common::JointTrajectory &traj,
                       vkc::VKCEnvBasic &env);

@@ -8,7 +8,7 @@ using namespace tesseract_rosutils;
 using namespace tesseract_planning;
 using namespace trajopt;
 
-void solveProb(PlannerRequest request) {
+tesseract_planning::PlannerResponse solveProb(PlannerRequest request) {
   // Set the optimization parameters (Most are being left as defaults)
 
   ROS_WARN("Constructed optimization problem. Starting optimization.");
@@ -20,10 +20,10 @@ void solveProb(PlannerRequest request) {
 
   ROS_WARN("%s", trajopt_response.message.c_str());
 
-  return;
+  return trajopt_response;
 }
 
-void solveOmplProb(PlannerRequest request) {
+tesseract_planning::PlannerResponse solveOmplProb(PlannerRequest request) {
   ROS_WARN("constructed ompl problem, solving...");
 
   OMPLMotionPlanner planner;
@@ -37,7 +37,7 @@ void solveOmplProb(PlannerRequest request) {
 
   CONSOLE_BRIDGE_logWarn("%d, %s", ik_response.successful,
                          ik_response.message.c_str());
-  return;
+  return ik_response;
 }
 
 
