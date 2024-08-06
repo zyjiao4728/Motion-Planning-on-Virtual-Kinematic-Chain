@@ -9,6 +9,10 @@ using namespace tesseract_collision;
 using namespace tesseract_rosutils;
 using namespace tesseract_planning;
 
+constexpr auto SOLUTION_FOUND{ "Found valid solution" };
+constexpr auto ERROR_INVALID_INPUT{ "Input to planner is invalid. Check that instructions and seed are compatible" };
+constexpr auto FAILED_TO_FIND_VALID_SOLUTION{ "Failed to find valid solution" };
+
 namespace vkc {
 ProbTranslator::ProbTranslator(OmplPlanParameters params) {
   inv_attp_max_ = params.inv_attp_max;
@@ -113,7 +117,8 @@ bool ProbTranslator::solveProblem(PlannerResponse &response,
                                   std::vector<std::vector<double>> &res_traj) {
   ROS_INFO("[%s]OMPL starts planning...", __func__);
   if (!start_waypoint.isToleranced() || !goal_waypoint.isToleranced()) {
-    response.status = tesseract_common::StatusCode(0);
+    response.successful = false;
+    response.message = FAILED_TO_FIND_VALID_SOLUTION;
     ROS_WARN("[%s]invalid %s %s, OMPL terminate the motion plan!", __func__,
              !start_waypoint.isToleranced() ? "start state" : "",
              !goal_waypoint.isToleranced() ? "goal state" : "");
@@ -142,7 +147,8 @@ bool ProbTranslator::solveProblem(PlannerResponse &response,
 
   //   return true;
   // }
-  response.status = tesseract_common::StatusCode(0);
+  response.successful = false;
+  response.message = FAILED_TO_FIND_VALID_SOLUTION;
   ROS_WARN("No results from OMPL");
   return false;
 }

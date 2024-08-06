@@ -668,7 +668,7 @@ CompositeInstruction generateMixedSeed(
           profile);
   }
   request.profiles = profiles;
-  planner.solve(request, response);
+  response = planner.solve(request);
   // response.results.print("mixed seed: ");
   CONSOLE_BRIDGE_logDebug("mixed seed generation success");
   return response.results;

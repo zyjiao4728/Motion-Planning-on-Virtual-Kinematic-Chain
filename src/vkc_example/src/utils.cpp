@@ -8,7 +8,7 @@ using namespace tesseract_rosutils;
 using namespace tesseract_planning;
 using namespace trajopt;
 
-void solveProb(PlannerRequest request, PlannerResponse &response, int n_iter) {
+void solveProb(PlannerRequest request) {
   // Set the optimization parameters (Most are being left as defaults)
 
   ROS_WARN("Constructed optimization problem. Starting optimization.");
@@ -16,28 +16,27 @@ void solveProb(PlannerRequest request, PlannerResponse &response, int n_iter) {
   // Solve problem. Results are stored in the response
   TrajOptMotionPlanner planner;
 
-  auto trajopt_status = planner.solve(request, response, true);
+  auto trajopt_response = planner.solve(request);
 
-  ROS_WARN("%d, %s", trajopt_status.value(), trajopt_status.message().c_str());
+  ROS_WARN("%s", trajopt_response.message.c_str());
 
   return;
 }
 
-void solveOmplProb(PlannerRequest request, PlannerResponse &response,
-                   int n_iter) {
+void solveOmplProb(PlannerRequest request) {
   ROS_WARN("constructed ompl problem, solving...");
 
   OMPLMotionPlanner planner;
   tesseract_planning::MMMOMotionPlanner ik_planner;
-  tesseract_common::StatusCode planning_status;
+  PlannerResponse ik_response;
   if (request.name == "3MO_IK_TRAJ") {
-    planning_status = ik_planner.solve(request, response, true);
+    ik_response = ik_planner.solve(request);
   } else {
-    planning_status = planner.solve(request, response, true);
+    ik_response = planner.solve(request);
   }
 
-  CONSOLE_BRIDGE_logWarn("%d, %s", planning_status.value(),
-                         planning_status.message().c_str());
+  CONSOLE_BRIDGE_logWarn("%d, %s", ik_response.successful,
+                         ik_response.message.c_str());
   return;
 }
 

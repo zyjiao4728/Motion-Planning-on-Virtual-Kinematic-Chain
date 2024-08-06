@@ -68,11 +68,10 @@ std::vector<double> run(vector<TesseractJointTraj> &joint_trajs,
             "optimization is ready. Press <Enter> to process the request.");
       }
 
-      solveProb(prob_ptr, response, n_iter);
+      solveProb(prob_ptr);
       end = chrono::steady_clock::now();
       // break;
-      if (TrajOptMotionPlannerStatusCategory::SolutionFound ==
-          response.status.value())  // optimization converges
+      if (response.successful)  // optimization converges
       {
         converged = true;
         elapsed_time.emplace_back(
@@ -82,10 +81,9 @@ std::vector<double> run(vector<TesseractJointTraj> &joint_trajs,
         break;
       } else {
         ROS_WARN(
-            "[%s]optimization could not converge, response code: %d, "
+            "[%s]optimization could not converge, "
             "description: %s",
-            __func__, response.status.value(),
-            response.status.message().c_str());
+            __func__, response.message.c_str());
         if (longhorizon) action->switchCandidate();
       }
     }
