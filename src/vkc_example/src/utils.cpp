@@ -14,7 +14,7 @@ tesseract_planning::PlannerResponse solveProb(PlannerRequest request) {
   ROS_WARN("Constructed optimization problem. Starting optimization.");
 
   // Solve problem. Results are stored in the response
-  TrajOptMotionPlanner planner;
+  TrajOptLegacyMotionPlanner planner;
 
   auto trajopt_response = planner.solve(request);
 
