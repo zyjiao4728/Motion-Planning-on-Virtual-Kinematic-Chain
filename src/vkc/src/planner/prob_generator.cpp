@@ -204,7 +204,7 @@ PlannerRequest ProbGenerator::getOmplRequest(VKCEnvBasic &env,
   auto cur_state = env.getVKCEnv()->getTesseract()->getState();
 
   CompositeInstruction seed =
-      generateSeed(seed_program, cur_state, env.getVKCEnv()->getTesseract(),
+      generateSeedLegacy(seed_program, cur_state, env.getVKCEnv()->getTesseract(),
                    0.087, 0.15, 0.087, n_steps);
 
   PlannerRequest request;
