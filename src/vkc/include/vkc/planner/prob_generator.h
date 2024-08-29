@@ -12,7 +12,7 @@ TESSERACT_COMMON_IGNORE_WARNINGS_POP
 #include <tesseract_motion_planners/trajopt/profile/trajopt_default_plan_profile.h>
 #include <tesseract_motion_planners/trajopt/profile/trajopt_default_solver_profile.h>
 #include <tesseract_motion_planners/trajopt/trajopt_motion_planner.h>
-#include <tesseract_process_managers/core/process_planning_request.h>
+// #include <tesseract_process_managers/core/process_planning_request.h>
 // #include <tesseract_process_managers/core/default_process_planners.h>
 
 #include <tesseract_environment/utils.h>

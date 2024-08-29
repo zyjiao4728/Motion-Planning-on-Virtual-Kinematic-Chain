@@ -10,6 +10,7 @@
 #include <tesseract_motion_planners/ompl/profile/ompl_default_plan_profile.h>
 #include <vkc/planner/prob_generator.h>
 #include <vkc/planner/traj_init.h>
+#include <tesseract_task_composer/task_composer_node_names.h>
 
 using namespace trajopt;
 using namespace tesseract_environment;
@@ -120,7 +121,8 @@ PlannerRequest ProbGenerator::genRequest(VKCEnvBasic &env, ActionBase::Ptr act,
 
   // compose request
   PlannerRequest request;
-  request.name = process_planner_names::TRAJOPT_PLANNER_NAME;
+  // request.name = process_planner_names::TRAJOPT_PLANNER_NAME;
+  request.name = tesseract_planning::node_names::TRAJOPT_PIPELINE_NAME;
   request.instructions = program;
   request.profiles = profiles;
   request.seed = seed;
@@ -210,7 +212,8 @@ PlannerRequest ProbGenerator::getOmplRequest(VKCEnvBasic &env,
   PlannerRequest request;
   request.name = wp.getLinkConstraints().size()
                      ? "3MO_IK_TRAJ"
-                     : process_planner_names::OMPL_PLANNER_NAME;
+                    //  : process_planner_names::OMPL_PLANNER_NAME;
+                    : tesseract_planning::node_names::OMPL_PIPELINE_NAME;
   request.instructions = program;
   request.profiles = profiles;
   request.env_state = cur_state;

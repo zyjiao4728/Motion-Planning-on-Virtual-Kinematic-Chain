@@ -241,8 +241,9 @@ TesseractSceneGraphPtr UrdfSceneEnv::configInverseChains_(
   Commands cmds;
   cmds.clear();
   for (const auto &pair : srdf->acm.getAllAllowedCollisions()) {
-    cmds.push_back(std::make_shared<AddAllowedCollisionCommand>(
-        pair.first.first, pair.first.second, pair.second));
+    srdf->acm.addAllowedCollision(pair.first.first, pair.first.second, pair.second);
+    cmds.push_back(std::make_shared<ModifyAllowedCollisionsCommand>(
+        srdf->acm, ModifyAllowedCollisionsType::ADD));
   }
 
   tesseract_->getTesseract()->applyCommands(cmds);
@@ -425,7 +426,7 @@ tesseract_scene_graph::SceneGraph::Ptr UrdfSceneEnv::inverseEnvChainHelper_(
   return tmp_sg;
 }
 
-/*****************************************************************8
+/*****************************************************************
  * Update inverted SceneGraph to environment
  */
 void UrdfSceneEnv::updateSceneGraphToEnv_(
